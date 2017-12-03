@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <title>Mad Street Den</title>  
+  <link rel="stylesheet" type="text/css" href="css/products.css">
+</head>
+
+<body>   
+    <div id="loadmask">
+        <img style="width:30%; position:fixed; left:35%; top:20%;"  src="images/loading_big.gif"/>
+    </div>
+    <div class="topbox" ng-app="productsApp" ng-controller="productsController">
+        <button id="backToTopButton" ng-click="backToTop()" class="backToTopButton">Top</button>  
+        <div class="row header">
+            <p><b>Mad Street Den</b></p>
+        </div>
+        <div class="row content" >
+            <div class="contentbox">
+                <div class="filter">
+                    <label>Refine by: </label>
+                    <div ng-repeat="category in categories" >
+                        <input type="checkbox" ng-click="applyFilter()" name="category" ng-model="category.selected">
+                        <span class="capitalize">&nbsp;{{category.name}}</span><br>
+                    </div>
+                </div>
+                <div class="mainpanel">
+                    <div class="mainpanelbox">
+                        <div class="sorter">
+                            <div style="float:left">Products:1-{{visibileProductSize}} of {{totalProductsCount}}</div>
+                            <div style="float:right">
+                                <label for="sortby">Sort by:</label>
+                                <select id="sortby" ng-model="sortByField" ng-change="sortBy()" 
+                                ng-init="sortByField = 'price-asc'">
+                                    <option ng-repeat="(key, obj) in sortOrderInfo" value={{key}}>{{obj.label}}</option>
+                                </select>
+                            </div>
+                            <div style="float:right; margin-right:10px;">
+                                <label for="currency">Currency:</label>
+                                <select id="currency" ng-model="selectedCurrency">
+                                    <option ng-repeat="(key, value) in currenciesInfo" value={{key}}>{{key}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="productsgrid" when-scrolled="loadMore()">
+                            <div class="product" ng-repeat="product in displayedProducts | limitTo : visibileProductSize  track by $index">
+                                <div class="content">
+                                    <div class="productimage">
+                                        <img class="rs" product-pic={{product.img}}/>
+                                    </div>
+                                    <div class="productdetails">
+                                        <div style="font-weight: 500;" class="productname">{{product.name}}</div>
+                                        <div style="font-weight: 500;" class="productprice">{{currencyChange(product.price)}}</div>
+                                        <div class="productcategory">{{product.cat}}</div>
+                                        <div star-rating rating-value=product.score></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row footer">
+            <div style="float:left; margin:10px 0px 0px 10px;">Copyright © 2017, Mad Street Den. All Rights Reserved.</div>
+        </div>
+    </div>
+    <script src="js/productsApp.js"></script>
+    <script src="js/productsController.js"></script>
+    <script src="js/productsDirectives.js"></script>
+    <script src="js/productsFilters.js"></script>
+</body>
+</html>
