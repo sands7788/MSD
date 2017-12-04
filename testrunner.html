@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/chai/chai.js"></script>
+    <script src="node_modules/jasmine/bin/jasmine.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    
+    <script>mocha.setup('bdd')</script>
+    <script src="node_modules/angular-mocks/angular-mocks.js"></script>
+    
+    
+    <script src="js/productsApp.js"></script>
+    <script src="js/productsController.js"></script>
+    <script src="js/productsDirectives.js"></script>
+    <script src="js/productsFilters.js"></script>
+    <!-- tests -->
+    <script src="tests/testController.js"></script>    
+    <script src="tests/testFilters.js"></script>
+
+    <script>mocha.run();</script>
+  </body>
+</html>

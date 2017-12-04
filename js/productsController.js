@@ -90,18 +90,20 @@ angular.module('controllers', []).controller('productsController', function($sco
     $scope.backToTop = function() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-        document.getElementById("backToTopButton").style.display = "none";
+        var backToTopButtonElement = document.getElementById("backToTopButton");
+        if(backToTopButtonElement) { backToTopButtonElement.style.display = "none"; }
     }
 
     //Method to fetch the products and initialize all data
     $scope.fetchProducts = function() {
-        document.getElementById('loadmask').style.visibility = "visible";
+        var loadMaskElement = document.getElementById('loadmask');
+        if(loadMaskElement) { loadMaskElement.style.visibility = "visible";}
         $http.get("https://test-prod-api.herokuapp.com/products").then(function(response) {
             $scope.products = response.data.products;
             $scope.displayedProducts = $filter('orderBy')($scope.products, "price", false);
             $scope.categories = $filter('fetchUniqueCategories')($scope.products);
             $scope.totalProductsCount = $scope.products.length;
-            document.getElementById('loadmask').style.visibility = "hidden";
+            if(loadMaskElement) { loadMaskElement.style.visibility = "hidden"; }
         });
     }
 

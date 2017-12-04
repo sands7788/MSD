@@ -31,7 +31,7 @@ It is a single page application for an E-Commerce type website based on AngularJ
 ### <a name=“run-tests”>Run Tests</a>
 
 1. Navigate to the project folder from your terminal and run
-   "npm install mocha chai --save-dev" (Incase the packages are not installed) and
+   "npm install mocha chai jasmine angular-mocks --save-dev" (Incase the packages are not installed) and
    "node index.js"
 
 2. Open the below URL from your browser
